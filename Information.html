@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotel Booking - Information</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+  /* Container utama bagian info-section */
+.info-section {
+  background-image: url('main-1.png'); /* ganti dengan nama file gambar kamu */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #264762;
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+}
+
+.top-bar {
+            background-color: white;
+            padding: 30px 20px;
+            color: black;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            box-shadow: 0 4px 6px #7BBCB0; /* Drop shadow added */
+        }
+
+        .top-bar a {
+            color: black;
+            text-decoration: none;
+        }
+
+/* Kontainer kiri About Us */
+.container-left {
+  flex: 3;
+  background-color: rgba(10, 10, 10, 0.6);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Kontainer kanan Facilities */
+.container-right {
+  flex: 2;
+  display: flex;
+  background-color: rgba(10, 10, 10, 0.6);
+  flex-direction: column;
+  border-radius: 8px;
+  color: white; /* background putih full container */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Header judul Facilities dengan background gelap full lebar container */
+.facilities-header {
+  
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+}
+
+/* Konten fasilitas (gambar) */
+.facilities-content {
+  padding: 10px;
+  /* background putih sudah di container-right */
+  flex-grow: 1;
+}
+
+/* Grid gambar fasilitas */
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+}
+
+/* Styling gambar fasilitas */
+.facility-grid img {
+  width: 100%;
+  height: 150px;         /* tinggi tetap supaya semua sama */
+  object-fit: cover;     /* supaya gambar tidak melar dan memenuhi area */
+  display: block;
+}
+
+/* Judul umum */
+.info-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Gambar About Us */
+.info-image {
+  margin-top: 40px;
+  width: 100%;
+  height: 120%;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Overlay teks di gambar About Us */
+.content-box {
+  position: relative;
+}
+
+.overlay-text {
+  position: absolute;
+    bottom: -28.8%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7); /* Lebih gelap untuk keterbacaan */
+    color: white;
+    padding: 50px 90px;
+    box-sizing: border-box;
+    border-radius: 0 0 8px 8px; /* Match image border */
+    letter-spacing: 1px;
+    text-align: justify;
+}
+
+.facilities-description {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #fff7f7;
+  line-height: 1.6;
+}
+
+
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+           
+        }
+
+        .footer-content {
+          display: flex;
+          flex-wrap: wrap;
+          position: relative;
+          margin-left: 50px;
+          padding-top: 90px; /* Ruang di atas konten */
+          margin-top: px; /* Ruang dari elemen sebelumnya */
+      }
+
+
+
+.footer-content > div {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    position: relative;
+}
+
+/* Garis horizontal penuh di bawah footer content */
+.footer-content::after {
+    content: "";
+    position: absolute;
+    bottom: 180px; /* Sesuaikan dengan margin yang diinginkan */
+    left: 1.5%;
+    right: 9%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+        .footer-content h3, .footer-content h4 {
+            margin-bottom: 10px;
+        }
+
+        .footer-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+
+        .brand-logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        }
+
+          .hotel-logo {
+              width: 95px; /* Adjust as needed */
+              height: auto;
+          }
+
+          .socials {
+              display: flex;
+              gap: 10px;
+              margin-top: 10px;
+          }
+
+          .socials img {
+              width: 24px; /* Standard icon size */
+              height: 24px;
+              transition: transform 0.3s ease;
+          }
+
+          .socials img:hover {
+              transform: scale(1.1); /* Small hover effect */
+          }
+
+        .newsletter button {
+            background-color: crimson;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            padding: 9px 35px;
+            cursor: pointer;
+        }
+
+        .copyright {
+            background: grey;
+            text-align: center;
+            margin-top: 5px;
+            padding: 30px;
+            font-size: 12px;
+            color: #000000;
+        }
+
+        /* Arrow Styles */
+        .arrow-container {
+            position: absolute;
+            width: 40px;
+            height: 58px;
+            right: 20px;
+            top: 5px;
+        }
+        
+        .circle {
+            box-sizing: border-box;
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            left: 0;
+            top: 14px;
+            background: #FFFFFF;
+            border: 1px solid #9C9C9C;
+            border-radius: 50%;
+        }
+        
+        .i-text {
+            position: absolute;
+            width: 43px;
+            height: 32px;
+            right: 0px;
+            top: 18px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 36px;
+            text-align: center;
+            text-transform: capitalize;
+            color: #1E1E1E;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 43px;
+            height: 32px;
+            right: 0px;
+            top: 0;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 36px;
+            text-align: center;
+            text-transform: capitalize;
+            color: #1E1E1E;
+        }
+</style>
+
+</head>
+<body>
+  <main>
+
+    <div class="top-bar">
+        <a href="#">&larr;</a>
+        <span>Transaction</span>
+        
+        <!-- Arrow Container -->
+        <div class="arrow-container">
+            <div class="circle"></div>
+            <div class="i-text">i</div>
+            <div class="dot">.</div>
+        </div>
+    </div>
+
+    <section class="info-section">
+      <!-- Kontainer Kiri (About Us) -->
+      <div class="container-left">
+        <h2 class="info-title">About Us</h2>
+        <div class="content-box">
+          <img src="main-1.png" alt="About Us" class="info-image" />
+          <div class="overlay-text">
+               location     : Jalan Danau Indah Block A, Tanjungpinang, Pulau Bintan,Kepulauan Riau,  Indonesia<br>
+               contact      : +62 81209051750<br>
+               e-mail       : puramevi01@gmail.com<br>
+               instagram    : puramevi.hotel
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Kontainer Kanan (Facilities) -->
+      <div class="container-right">
+  <div class="facilities-header">
+    <h2 class="info-title">Facilities</h2>
+  </div>
+  <div class="facilities-content">
+  <div class="facility-grid">
+    <img src="bathub.jpg" alt="Facility 1" />
+    <img src="yoga.jpeg" alt="Facility 2" />
+    <img src="balcon.jpg" alt="Facility 3" />
+    <img src="bar.jpg" alt="Facility 4" />
+    <img src="gym.jpg" alt="Facility 5" />
+    <img src="pool.jpg" alt="Facility 6" />
+  </div>
+  <div class="facilities-description">
+    <p>
+            <b>🛎 Features & Facilities</b>
+        <li><b>Bar:</b> A relaxing spot offering a selection of  fresh juices etc</li>
+        <li><b>Balcony:</b> Each room includes a private balcony to enjoy the surrounding views
+        <li><b>Bathtub:</b>Unwind with a soothing bath in a well-appointed private bathtub
+        <li><b>Yoga:</b>Peaceful yoga area available for guests looking to stay balanced and energized
+        <li><b>Pool:</b>Refresh in our swimming pool, perfect for both adults and children
+        <li><b>Gym:</b>Fully equipped fitness center for guests who like to stay active during their stay</li>
+        <br>
+            <b>🏨 Room Access to Facilities</b>
+        <li><b>Deluxe Room:</b>Includes full access to all features and facilities</li>
+        <li><b>Superior Room:</b>Includes all facilities, except the gym</li>
+        <li><b>Standard Room:</b>Includes all facilities, except the gym and bar</li>
+    </p>
+  </div>
+</div>
+</main>
+  <footer>
+        <div class="footer-content">
+            <div class="brand">
+              <div class="brand-logo-container">
+                  <img src="logo3.jpg" alt="Puramevi Hotel Logo" class="hotel-logo">
+                  <div>
+                      <h3>Puramevi Hotel</h3>
+                      <p>Be Part of the Puramevi Experience</p>
+                      <div class="socials">
+                          <a href="#"><img src="Instagram.png" alt="Instagram"></a>
+                          <a href="#"><img src="Tiktok.jpg" alt="Tiktok"></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="navigation">
+                <h4>Navigation</h4>
+                <ul>
+                    <li>Home Page</li>
+                    <li>Room Type</li>
+                    <li>Our Service</li>
+                    <li>Hotel Contact Information</li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <h4>Contact</h4>
+                <p>Call: 0891-7799-990</p>
+                <p>Email: puramevihotel@hotel.com</p>
+                <p>Jl. Hotel Damai No.4A</p>
+            </div>
+
+            <div class="newsletter">
+                <h4>Get the latest information</h4>
+                <input type="email" placeholder="Enter email">
+                <br>
+                <button>Send</button>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; Puramevi Hotel 2025. All Right Reserved
+        </div>
+    </footer>
+</body>
+</html>

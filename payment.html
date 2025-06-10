@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Pembayaran</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .sub-header {
+      height: 90px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .left-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .back-button {
+      font-size: 28px;
+      font-weight: 900;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+      margin-right: 8px;
+      padding: 0;
+      line-height: 1;
+      user-select: none;
+      display: inline-block;
+      background: none;
+      border: none;
+    }
+
+    .page-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .info-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background-color: #fff;
+      border: 2px solid #aaa;
+      color: #888;
+      font-weight: bold;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .info-button:hover {
+      background-color: #f9f9f9;
+      color: #666;
+      border-color: #888;
+    }
+
+    /* ============= detail pembayaran ============= */
+    .detail-pembayaran {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  background-color: #fff;
+  padding: 40px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-pembayaran img {
+  width: 300px;
+  height: 170px;
+  object-fit: cover;
+  margin-left: 50px;
+  margin-right: 50px; /* Atur jarak langsung dari gambar */
+}
+
+.keterangan {
+  flex: 1;
+  padding: 0; /* Hapus padding agar tidak menambah jarak */
+  display: flex;
+  align-items: center;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+
+    /* ========== menu pembayaran dengan background dan overlay biru ========== */
+    .menu-pembayaran {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  padding: 40px 20px 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-pembayaran::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('main-1.png'); /* Ganti path gambar */
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.menu-pembayaran::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(38, 71, 98, 0.4);
+  z-index: 1;
+}
+
+.menu-pembayaran > * {
+  position: relative;
+  z-index: 2;
+}
+
+.menu-pembayaran-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0A0A0A;
+  opacity: 60%;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 3px 12px;
+  border-bottom-right-radius: 8px;
+  height: 30px;
+  width: 100%;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.go-to-transaction {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #264762;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.go-to-transaction img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.go-to-transaction:hover {
+  background-color: #e2ecf1;
+  transform: scale(1.03);
+}
+
+footer {
+            background-color: #1a1a1a;
+            color: white;
+           
+        }
+
+        .footer-content {
+          display: flex;
+          flex-wrap: wrap;
+          position: relative;
+          margin-left: 50px;
+          padding-top: 90px; /* Ruang di atas konten */
+          margin-top: 20px; /* Ruang dari elemen sebelumnya */
+      }
+
+/* Garis horizontal penuh di atas footer content */
+.footer-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    background: rgba(255, 255, 255, 0.3); /* Alternatif lebih sederhana */
+}
+
+.footer-content > div {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    position: relative;
+}
+
+/* Garis horizontal penuh di bawah footer content */
+.footer-content::after {
+    content: "";
+    position: absolute;
+    bottom: 180px; /* Sesuaikan dengan margin yang diinginkan */
+    left: 1.5%;
+    right: 9%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+        .footer-content h3, .footer-content h4 {
+            margin-bottom: 10px;
+        }
+
+        .footer-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+
+        .brand-logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        }
+
+          .hotel-logo {
+              width: 95px; /* Adjust as needed */
+              height: auto;
+          }
+
+          .socials {
+              display: flex;
+              gap: 10px;
+              margin-top: 10px;
+          }
+
+          .socials img {
+              width: 24px; /* Standard icon size */
+              height: 24px;
+              transition: transform 0.3s ease;
+          }
+
+          .socials img:hover {
+              transform: scale(1.1); /* Small hover effect */
+          }
+
+        .newsletter button {
+            background-color: crimson;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            padding: 9px 35px;
+            cursor: pointer;
+        }
+
+        .copyright {
+            background: grey;
+            text-align: center;
+            margin-top: 5px;
+            padding: 30px;
+            font-size: 12px;
+            color: #000000;
+        }
+
+        /* Arrow Styles */
+        .arrow-container {
+            position: absolute;
+            width: 40px;
+            height: 58px;
+            right: 20px;
+            top: 5px;
+        }
+        
+        .circle {
+            box-sizing: border-box;
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            left: 0;
+            top: 14px;
+            background: #FFFFFF;
+            border: 1px solid #9C9C9C;
+            border-radius: 50%;
+        }
+        
+        .i-text {
+            position: absolute;
+            width: 43px;
+            height: 32px;
+            right: 0px;
+            top: 18px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 36px;
+            text-align: center;
+            text-transform: capitalize;
+            color: #1E1E1E;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 43px;
+            height: 32px;
+            right: 0px;
+            top: 0;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 36px;
+            text-align: center;
+            text-transform: capitalize;
+            color: #1E1E1E;
+        }
+  </style>
+</head>
+<body>
+
+  <section class="sub-header">
+    <div class="left-group">
+      <a href="index.html" class="back-button" aria-label="Kembali">&#8592;</a>
+      <span class="page-title">Order Cart</span>
+    </div>
+    <a href="information.html" class="info-button" title="Information" aria-label="Informasi">i</a>
+  </section>
+
+  <section class="detail-pembayaran">
+  <img src="Superior-1.jpg" alt="Gambar Pembayaran">
+  <div class="keterangan">
+    <div class="info-grid">
+      <span>Name</span>         <span>: Putri Ramadhanti</span>
+      <span>Mobile Phone</span> <span>: 0853 6312 4465</span>
+      <span>Room Number</span>  <span>: 101</span>
+      <span>Name Of Room</span> <span>: Superior Class 1</span>
+      <span>Order Date</span>   <span>: 10 - 06 - 2025</span>
+      <span>Price</span>        <span>: Rp. 650.000</span>
+    </div>
+  </div>
+</section>
+
+ <section class="menu-pembayaran">
+  <div class="menu-pembayaran-label">Payment Menu</div>
+
+  <!-- Kontainer klik ke transaksi -->
+  <a href="transaksi.html" class="go-to-transaction">
+    <img src="BCA.jpg" alt="Payment Icon">
+    <img src="BRI.jpg" alt="Payment Icon">
+    <img src="BNI.jpg" alt="Payment Icon">
+    <img src="Dana.jpg" alt="Payment Icon">
+    <img src="mandiri.jpg" alt="Payment Icon">
+    <span>Lanjut ke Transaksi</span>
+  </a>
+</section>
+
+<footer>
+        <div class="footer-content">
+            <div class="brand">
+              <div class="brand-logo-container">
+                  <img src="logo3.jpg" alt="Puramevi Hotel Logo" class="hotel-logo">
+                  <div>
+                      <h3>Puramevi Hotel</h3>
+                      <p>Be Part of the Puramevi Experience</p>
+                      <div class="socials">
+                          <a href="#"><img src="Instagram.png" alt="Instagram"></a>
+                          <a href="#"><img src="Tiktok.jpg" alt="Tiktok"></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="navigation">
+                <h4>Navigation</h4>
+                <ul>
+                    <li>Home Page</li>
+                    <li>Room Type</li>
+                    <li>Our Service</li>
+                    <li>Hotel Contact Information</li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <h4>Contact</h4>
+                <p>Call: 0891-7799-990</p>
+                <p>Email: puramevihotel@hotel.com</p>
+                <p>Jl. Hotel Damai No.4A</p>
+            </div>
+
+            <div class="newsletter">
+                <h4>Get the latest information</h4>
+                <input type="email" placeholder="Enter email">
+                <br>
+                <button>Send</button>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; Puramevi Hotel 2025. All Right Reserved
+        </div>
+    </footer>
+
+</body>
+</html>

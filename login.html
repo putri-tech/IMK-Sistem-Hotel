@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Puramevi Hotel - Signup</title>
+    <style>
+        :root {
+            --primary-bg-dark: #1a1a1a;
+            --secondary-bg-dark: #2c2c2c;
+            --text-color-light: white;
+            --text-color-dark: #333; 
+            --border-color: #ddd;
+            --input-bg-color: #f9f9f9; 
+            --button-primary-bg: linear-gradient(to right, #007bff, #0056b3); 
+            --button-primary-text: white;
+            --button-secondary-bg: #e0e0e0; 
+            --button-secondary-text: #666;
+            --modal-bg-color: #fefefe; 
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        body{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('main-1.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--text-color-dark);
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 100, 300, 0.3); /* Warna biru dengan 30% opacity */
+            z-index: -1; /* Letakkan di bawah konten tapi di atas background */
+        }
+
+        .modal-container {
+            background-color: var(--modal-bg-color);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            width: 90%;
+            max-width: 550px;
+            text-align: center;
+            box-sizing: border-box; 
+        }
+
+        .modal-container h2 {
+            font-size: 2em;
+            margin-bottom: 5px;
+            color: var(--text-color-dark);
+        }
+
+        .modal-container p.subtitle {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            background-color: #f0f0f0; 
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden; 
+        }
+
+        .toggle-buttons button {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            color: var(--button-secondary-text);
+            background-color: transparent;
+        }
+
+        .toggle-buttons button.active {
+            background: var(--button-primary-bg); 
+            color: var(--button-primary-text);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: calc(100% - 24px); 
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            color: var(--text-color-dark);
+            background-color: var(--input-bg-color);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--link-color);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(to right, #004c7c, #002e4d); 
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .signup-button:hover {
+            background: linear-gradient(to right, #003e6b, #001f33);
+            transform: translateY(-2px);
+        }
+
+        .signup-button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsif */
+        @media (max-width: 500px) {
+            .modal-container {
+                padding: 30px 20px;
+            }
+            .modal-container h2 {
+                font-size: 1.8em;
+            }
+            .toggle-buttons button {
+                font-size: 1em;
+                padding: 10px 12px;
+            }
+            .input-group input {
+                padding: 10px;
+            }
+            .signup-button {
+                padding: 12px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-container">
+        <h2>Welcome to Puramevi Hotel</h2>
+        <p class="subtitle">"Signup Form"</p>
+
+        <div class="toggle-buttons">
+            <button id="loginBtn">Login</button>
+            <button id="signupBtn" class="active">SignUp</button>
+        </div>
+
+        <form id="signupForm">
+            <div class="input-group">
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit" class="signup-button">SignUp</button>
+        </form>
+
+        <form id="loginForm" style="display: none;">
+            <div class="input-group">
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="signup-button">Login</button>
+            <p style="font-size:0.9em; margin-top:20px;"><a href="#" style="color:#007bff; text-decoration:none;">Forgot Password?</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+
+            loginBtn.addEventListener('click', function() {
+                loginBtn.classList.add('active');
+                signupBtn.classList.remove('active');
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+            });
+
+            signupBtn.addEventListener('click', function() {
+                signupBtn.classList.add('active');
+                loginBtn.classList.remove('active');
+                signupForm.style.display = 'block';
+                signupForm.querySelector('input[type="email"]').focus(); // Fokus ke email signup
+                loginForm.style.display = 'none';
+            });
+
+            // Set initial focus to signup form if it's visible by default
+            if (signupForm.style.display !== 'none') {
+                 signupForm.querySelector('input[type="email"]').focus();
+            }
+
+            // Basic form submission prevention for demo purposes
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Signup form submitted! (This is a demo, no actual submission)');
+                // Implement actual signup logic here
+            });
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Login form submitted! (This is a demo, no actual submission)');
+                // Implement actual login logic here
+            });
+        });
+    </script>
+</body>
+</html>

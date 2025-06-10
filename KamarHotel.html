@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kamar Hotel</title>
+  <style>
+    /* Reset margin & padding seluruh halaman */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: white;
+    }
+
+    /* Sub-header full width, tinggi 90px, tanpa jarak atas */
+    .sub-header {
+      height: 90px;
+      margin: 0;
+      padding: 0 16px;
+      box-sizing: border-box;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .left-group {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Tombol panah kembali */
+    .back-button {
+      font-size: 28px;       
+      font-weight: 900;      
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+      margin-right: 8px;
+      line-height: 1;
+      user-select: none;
+      background: none;
+      border: none;
+    }
+
+    /* Judul halaman */
+    .page-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Tombol info (lingkaran dengan huruf i) */
+    .info-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background-color: #fff;
+      border: 2px solid #aaa;
+      color: #888;
+      font-weight: bold;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .info-button:hover {
+      background-color: #f9f9f9;
+      color: #666;
+      border-color: #888;
+    }
+
+    /* Wrapper untuk kontainer kamar, beri margin top agar ada jarak dari sub-header */
+    .wrapper {
+      display: flex;
+      align-items: stretch; /* agar tinggi anak-anak sejajar */
+      gap: 16px;
+      margin: 24px 16px 40px 16px;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    .kontainer-kiri {
+      background: #fff;
+      padding: 0;
+      border: 3px solid rgba(0, 0, 0, 0.2);
+      display: flex;
+      gap: 0;
+      width: 1000px;
+      overflow: visible;
+      position: relative;
+    }
+
+    .gambar-kamar {
+      width: calc(300px + 6px); /* 300 + 3 kiri + 3 kanan */
+      height: calc(200px + 6px); /* 200 + 3 atas + 3 bawah */
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-left: -3px; /* geser ke kiri */
+      margin-top: -3px;  /* geser ke atas */
+      margin-bottom: -3px; /* geser ke bawah */
+    }
+
+    .gambar-kamar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .label-diskon {
+      position: absolute;
+      right: 0;
+      background-color: #EA9806;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      line-height: 24px;
+      width: 80px;
+      height: 24px;
+      z-index: 1;
+    }
+
+    .info-kamar {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Agar teks naik ke atas */
+      padding: 20px 24px;
+      margin-top: 20px; /* Atur sesuai kebutuhan, misal -10px */
+      margin-left: 40px;
+    }
+
+    .info-kamar h2 {
+      font-size: 20px;
+      margin: 0 0 10px 0;
+    }
+
+    .info-kamar p {
+      color: #555;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .tombol-kanan {
+      display: flex;
+      align-items: flex-end; /* agar tombol di bawah */
+      justify-content: flex-start; /* tombol mulai dari kiri */
+      gap: 12px;
+    }
+
+    .btn-order, .btn-detail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;       /* Lebar sama */
+      height: 35px;       /* Tinggi sama */
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 0;   /* Tidak ada lengkungan */
+      box-sizing: border-box;
+    }
+
+
+    .btn-order {
+      background-color: #0079C2;
+      color: white;
+      border: none;
+    }
+
+    .btn-order:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-detail {
+      background-color: white;
+      color: black;
+      font-weight: normal;
+      border: 1.5px solid black;
+    }
+
+    .btn-detail:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    /* ======= footer ======   */
+     footer {
+            background-color: #1a1a1a;
+            color: white;
+           
+        }
+
+        .footer-content {
+          display: flex;
+          flex-wrap: wrap;
+          position: relative;
+          margin-left: 50px;
+          padding-top: 90px; /* Ruang di atas konten */
+          margin-top: 20px; /* Ruang dari elemen sebelumnya */
+      }
+
+/* Garis horizontal penuh di atas footer content */
+.footer-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    background: rgba(255, 255, 255, 0.3); /* Alternatif lebih sederhana */
+}
+
+.footer-content > div {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    position: relative;
+}
+
+/* Garis horizontal penuh di bawah footer content */
+.footer-content::after {
+    content: "";
+    position: absolute;
+    bottom: 180px; /* Sesuaikan dengan margin yang diinginkan */
+    left: 1.5%;
+    right: 9%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+        .footer-content h3, .footer-content h4 {
+            margin-bottom: 10px;
+        }
+
+        .footer-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+
+        .brand-logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        }
+
+          .hotel-logo {
+              width: 95px; /* Adjust as needed */
+              height: auto;
+          }
+
+          .socials {
+              display: flex;
+              gap: 10px;
+              margin-top: 10px;
+          }
+
+          .socials img {
+              width: 24px; /* Standard icon size */
+              height: 24px;
+              transition: transform 0.3s ease;
+          }
+
+          .socials img:hover {
+              transform: scale(1.1); /* Small hover effect */
+          }
+
+        .newsletter button {
+            background-color: crimson;
+            color: white;
+            border: none;
+            margin-top: 10px;
+            padding: 9px 35px;
+            cursor: pointer;
+        }
+
+        .copyright {
+            background: grey;
+            text-align: center;
+            margin-top: 5px;
+            padding: 30px;
+            font-size: 12px;
+            color: #000000;
+        }
+
+        /* Arrow Styles */
+        .arrow-container {
+            position: absolute;
+            width: 40px;
+            height: 58px;
+            right: 20px;
+            top: 5px;
+        }
+        
+        .circle {
+            box-sizing: border-box;
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            left: 0;
+            top: 14px;
+            background: #FFFFFF;
+            border: 1px solid #9C9C9C;
+            border-radius: 50%;
+        }
+        
+        .i-text {
+            position: absolute;
+            width: 43px;
+            height: 32px;
+            right: 0px;
+            top: 18px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 36px;
+            text-align: center;
+            text-transform: capitalize;
+            color: #1E1E1E;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 43px;
+            height: 32px;
+            right: 0px;
+            top: 0;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 36px;
+            text-align: center;
+            text-transform: capitalize;
+            color: #1E1E1E;
+        }
+  </style>
+</head>
+<body>
+
+  <section class="sub-header">
+    <div class="left-group">
+      <a href="index.html" class="back-button" aria-label="Kembali">&#8592;</a>
+      <span class="page-title">Room Detail</span>
+    </div>
+    <a href="information.html" class="info-button" title="Information" aria-label="Informasi">i</a>
+  </section>
+
+  <!-- 6 Kontainer Kamar -->
+  <div class="wrapper">
+    <div class="kontainer-kiri">
+      <div class="gambar-kamar">
+        <div class="label-diskon">20%</div>
+        <img src="Superior-1.jpg" alt="Kamar 1" />
+      </div>
+      <div class="info-kamar">
+        <h2>Superior Class 1</h2>
+        <p>Room</p>
+      </div>
+    </div>
+    <div class="tombol-kanan">
+      <a href="Keranjang.html" class="btn-order">Keranjang</a>
+      <a href="detailkamar.html?kamar=superior" class="btn-detail">More Detail</a>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="kontainer-kiri">
+      <div class="gambar-kamar">
+        <img src="Standard-1.jpg" alt="Kamar 2" />
+      </div>
+      <div class="info-kamar">
+        <h2>Standard Class 1</h2>
+        <p>Room</p>
+      </div>
+    </div>
+    <div class="tombol-kanan">
+      <a href="Keranjang.html" class="btn-order">Keranjang</a>
+      <a href="detailkamar.html?kamar=standard" class="btn-detail">More Detail</a>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="kontainer-kiri">
+      <div class="gambar-kamar">
+        <div class="label-diskon">25%</div>
+        <img src="Deluxe-1.jpeg" alt="Kamar 3" />
+      </div>
+      <div class="info-kamar">
+        <h2>Deluxe Class 1</h2>
+        <p>Room</p>
+      </div>
+    </div>
+    <div class="tombol-kanan">
+      <a href="Keranjang.html" class="btn-order">Keranjang</a>
+      <a href="detailkamar.html?kamar=deluxe" class="btn-detail">More Detail</a>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="kontainer-kiri">
+      <div class="gambar-kamar">
+        <img src="Superior-2.jpg" alt="Kamar 4" />
+      </div>
+      <div class="info-kamar">
+        <h2>Superior Class 2</h2>
+        <p>Room</p>
+      </div>
+    </div>
+    <div class="tombol-kanan">
+      <a href="Keranjang.html" class="btn-order">Keranjang</a>
+      <a href="detailkamar.html?kamar=superior2" class="btn-detail">More Detail</a>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="kontainer-kiri">
+      <div class="gambar-kamar">
+        <div class="label-diskon">25%</div>
+        <img src="Standard-2.jpg" alt="Kamar 5" />
+      </div>
+      <div class="info-kamar">
+        <h2>Standard Class 2</h2>
+        <p>Room</p>
+      </div>
+    </div>
+    <div class="tombol-kanan">
+      <a href="Keranjang.html" class="btn-order">Keranjang</a>
+      <a href="detailkamar.html?kamar=standard2" class="btn-detail">More Detail</a>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="kontainer-kiri">
+      <div class="gambar-kamar">
+        <div class="label-diskon">10%</div>
+        <img src="Deluxe-2.jpg" alt="Kamar 6" />
+      </div>
+      <div class="info-kamar">
+        <h2>Deluxe Class 2</h2>
+        <p>Room</p>
+      </div>
+    </div>
+    <div class="tombol-kanan">
+      <a href="Keranjang.html" class="btn-order">Keranjang</a>
+      <a href="detailkamar.html?kamar=deluxe2" class="btn-detail">More Detail</a>
+    </div>
+  </div>
+
+  <footer>
+        <div class="footer-content">
+            <div class="brand">
+              <div class="brand-logo-container">
+                  <img src="logo3.jpg" alt="Puramevi Hotel Logo" class="hotel-logo">
+                  <div>
+                      <h3>Puramevi Hotel</h3>
+                      <p>Be Part of the Puramevi Experience</p>
+                      <div class="socials">
+                          <a href="#"><img src="Instagram.png" alt="Instagram"></a>
+                          <a href="#"><img src="Tiktok.jpg" alt="Tiktok"></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="navigation">
+                <h4>Navigation</h4>
+                <ul>
+                    <li>Home Page</li>
+                    <li>Room Type</li>
+                    <li>Our Service</li>
+                    <li>Hotel Contact Information</li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <h4>Contact</h4>
+                <p>Call: 0891-7799-990</p>
+                <p>Email: puramevihotel@hotel.com</p>
+                <p>Jl. Hotel Damai No.4A</p>
+            </div>
+
+            <div class="newsletter">
+                <h4>Get the latest information</h4>
+                <input type="email" placeholder="Enter email">
+                <br>
+                <button>Send</button>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; Puramevi Hotel 2025. All Right Reserved
+        </div>
+    </footer>
+
+</body>
+</html>
